@@ -7,12 +7,17 @@ test.beforeEach('before each bethod', async ({ page }) => {
 })
 
 test.describe("Form layouts page", () => {
+    test.describe.configure({retries: 2})//setting retries only for part of tests
     test.beforeEach('before each bethod', async ({ page }) => {
         await page.getByText('Forms').click()
         await page.getByText('Form Layouts').click()
     })
 
-    test("input fields", async ({ page }) => {
+    test("input fields", async ({ page }, testInfo) => {
+        if(testInfo.retry){
+            //do something
+        }
+
         const usingTheGridEmailInput = page.locator('nb-card', { hasText: 'Using the Grid' }).getByRole('textbox', { name: "Email" })
 
         await usingTheGridEmailInput.fill('test@test.com')
