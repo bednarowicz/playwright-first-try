@@ -1,0 +1,21 @@
+import { defineConfig, devices } from '@playwright/test';
+import type { TestOptions } from './test-options';
+
+
+
+export default defineConfig<TestOptions>({
+
+  use: {
+    globalsQaURL: 'https://www.globalsqa.com/demo-site/draganddrop/',
+    baseURL: 'http://localhost:4200'
+  },
+  projects: [
+    {
+      name: 'pageObjectFullScreen',
+      testMatch: 'usePageObjects.spec.ts',
+      use: {
+        viewport: { width: 1920, height: 1080}
+      }
+    }
+  ],
+});

@@ -5,7 +5,7 @@ import { expect, test } from '@playwright/test'
 
 // })
 test.beforeEach('before each test', async ({ page }) => {
-    await page.goto('http://localhost:4200')
+    await page.goto('/')
     await page.getByText('Forms').click()
     await page.getByText('Form Layouts').click()
 })
@@ -122,7 +122,7 @@ test('extracting values', async ({page}) => {
 
     //attribute & input vale
     const emailField = basicForm.getByRole('textbox', {name: "Email"})
-    const placeholderValue = emailField.getAttribute('placeholder')
+    const placeholderValue = await emailField.getAttribute('placeholder')
     expect(placeholderValue).toEqual('Email')
 
     await emailField.fill('test@test.com')
@@ -144,6 +144,6 @@ test('assertions', async ({page}) => {
     await expect(basicFormButton).toHaveText('Submit')
 
     //Soft Assertion
-    await expect.soft(basicFormButton).toHaveText("Submit5")
+    await expect.soft(basicFormButton).toHaveText("Submit")
     await basicFormButton.click()
 })

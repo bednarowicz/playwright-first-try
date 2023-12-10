@@ -7,7 +7,7 @@ import { PageManager } from "../page-objects/pageManager"
 import {faker} from '@faker-js/faker'
 
 test.beforeEach('before each bethod', async ({ page }) => {
-    await page.goto('http://localhost:4200/')
+    await page.goto('/')
 })
 
 test('navigate to form page', async ({page}) => {
@@ -25,9 +25,12 @@ test('parametrized methods', async({page}) => {
     const randomEmail = `${randomFullName}${faker.number.int(1000)}@test.com`
 
     await pm.navigateTo().formLayoutsPage()
-    await pm.onFormLayoutsPage().submitUsingTheGridForm('test@com', "welcome", 'Option 2')
+    await pm.onFormLayoutsPage().submitUsingTheGridForm(process.env.USERNAME, process.env.PASSWORD, 'Option 2')
+    await page.screenshot({path: 'screenshots/formsLayoutsPage.png'})
+    const buffer = await page.screenshot()
+    console.log(buffer.toString('base64'))
     await pm.onFormLayoutsPage().submitInLIneFormWithNameEmailAndCheckbox(randomFullName, randomEmail, false)
-
+    await page.locator('nb-card', {hasText: "Inline form"}).screenshot({path: 'screenshots/formsLayoutsPage2.png'})
     // await pm.navigateTo().datePickerPage()
 
     // await pm.onDatepickerPate().selectCommonDatePickerDateFromToday(30)

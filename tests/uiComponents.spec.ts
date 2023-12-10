@@ -2,12 +2,16 @@ import test, { expect } from "@playwright/test";
 import { async } from "rxjs";
 import { delay } from "rxjs-compat/operator/delay";
 
+test.describe.configure({mode: 'parallel'})
+
 test.beforeEach('before each bethod', async ({ page }) => {
-    await page.goto('http://localhost:4200/pages/iot-dashboard')
+    await page.goto('/')
 })
 
 test.describe("Form layouts page", () => {
     test.describe.configure({retries: 2})//setting retries only for part of tests
+    test.describe.configure({mode: 'serial'})
+
     test.beforeEach('before each bethod', async ({ page }) => {
         await page.getByText('Forms').click()
         await page.getByText('Form Layouts').click()
