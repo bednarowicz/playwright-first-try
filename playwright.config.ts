@@ -49,6 +49,16 @@ export default defineConfig<TestOptions>({
 
   /* Configure projects for major browsers */
   projects: [
+
+    {
+      name: 'mobile',
+      testMatch: 'testMobile.spec.ts',
+      use: {
+        ...devices['iPhone 11 Pro']
+        // viewport: {width 414, height: 800}
+      }
+
+    },
     {
       name: 'stage',
       use: { ...devices['Desktop Chrome'],
@@ -65,7 +75,7 @@ export default defineConfig<TestOptions>({
       use: { //...devices['Desktop Firefox']
         browserName: 'firefox',
         video: {
-          mode: 'on',
+          mode: 'on-first-retry',
           size: { width: 1920, height: 1080}
         }
      },
@@ -81,7 +91,7 @@ export default defineConfig<TestOptions>({
       use: {
         viewport: { width: 1920, height: 1080}
       }
-    }
+    },
 
     /* Test against mobile viewports. */
     // {

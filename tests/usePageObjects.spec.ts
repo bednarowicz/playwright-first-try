@@ -6,11 +6,11 @@ import { DatepickerPage } from "../page-objects/datepickerPage"
 import { PageManager } from "../page-objects/pageManager"
 import {faker} from '@faker-js/faker'
 
-test.beforeEach('before each bethod', async ({ page }) => {
+test.beforeEach('before each bethod @beforeEach', async ({ page }) => {
     await page.goto('/')
 })
 
-test('navigate to form page', async ({page}) => {
+test('navigate to form page @smoke @regression', async ({page}) => {
     const pm = new PageManager(page)
     await pm.navigateTo().formLayoutsPage()
     await pm.navigateTo().datePickerPage()
@@ -19,7 +19,7 @@ test('navigate to form page', async ({page}) => {
     await pm.navigateTo().toolTipPage()
 })
 
-test('parametrized methods', async({page}) => {
+test('parametrized methods @smoke', async({page}) => {
     const pm = new PageManager(page)
     const randomFullName = faker.person.fullName()
     const randomEmail = `${randomFullName}${faker.number.int(1000)}@test.com`
